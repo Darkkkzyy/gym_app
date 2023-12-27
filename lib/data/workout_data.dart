@@ -62,6 +62,8 @@ class WorkoutData extends ChangeNotifier {
 
     //check of boolean to show user completed the exercise
     relevantExercise.isCompleted = !relevantExercise.isCompleted;
+
+    notifyListeners();
   }
 
   //return a relevant workout object, given the workout name
