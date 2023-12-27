@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:gym_app/models/exercice.dart';
 import 'package:gym_app/models/workout.dart';
 
-class WorkoutData {
+class WorkoutData extends ChangeNotifier {
   /*
 
   Workout Data Structure
@@ -23,9 +24,18 @@ class WorkoutData {
     return workoutList;
   }
 
+  //get the lenght of the
+  int numberOfExercisesInWorkout(String workoutName) {
+    Workout relevantWorkout = getRelevantWorkout(workoutName);
+
+    return relevantWorkout.exercises.length;
+  }
+
   //add a workout
   void addWorkout(String name) {
     workoutList.add(Workout(name: name, exercises: []));
+
+    notifyListeners();
   }
 
   //add a exercise to workout
@@ -41,14 +51,18 @@ class WorkoutData {
 
     revelantWorkout.exercises.add(
         Exercise(name: workoutName, weight: weight, sets: sets, reps: reps));
+
+    notifyListeners();
   }
 
   //check the erxercise once is done
   void chekOffExercise(String workoutName, String exerciseName) {
     //find a relevant workout
-  }
+    Exercise relevantExercise = getRelevantExercise(workoutName, exerciseName);
 
-  //get the lenght of the workout
+    //check of boolean to show user completed the exercise
+    relevantExercise.isCompleted = !relevantExercise.isCompleted;
+  }
 
   //return a relevant workout object, given the workout name
   Workout getRelevantWorkout(String workoutName) {
