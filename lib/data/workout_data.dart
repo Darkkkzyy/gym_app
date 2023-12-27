@@ -4,32 +4,31 @@ import 'package:gym_app/models/workout.dart';
 class WorkoutData {
   /*
 
-  Estrutura de Dados para Treinos
+  Workout Data Structure
 
-  -- Esta lista contém diferentes treinos.
-  -- Cada treino tem um nome e uma lista de exercícios.
+  --this overal list contains the diferente workouts
+  --each workout has a name, and list of exercices 
 
   */
 
-  // Lista de treinos
   List<Workout> workoutList = [
-    // Treino padrão
-    Workout(name: "Parte Superior do Corpo", exercices: [
-      Exercise(name: "Curl de Bíceps", weight: "10Kg", sets: "10", reps: "10")
+    //default workout
+    Workout(name: "Upper Boddy", exercises: [
+      Exercise(name: "Biceps Curls", weight: "10Kg", sets: "10", reps: "10")
     ])
   ];
 
-  // Obtém a lista de treinos
+  // get the list of workouts
   List<Workout> getWorkoutList() {
     return workoutList;
   }
 
-  // Adiciona um treino
+  //add a workout
   void addWorkout(String name) {
-    workoutList.add(Workout(name: name, exercices: []));
+    workoutList.add(Workout(name: name, exercises: []));
   }
 
-  // Adiciona um exercício a um treino
+  //add a exercise to workout
   void addExercise(
     String workoutName,
     String exerciseName,
@@ -37,35 +36,40 @@ class WorkoutData {
     String reps,
     String sets,
   ) {
-    // Encontra um treino relevante
-    Workout relevantWorkout = getRelevantWorkout(workoutName);
+    //find a revelant workout
+    Workout revelantWorkout = getRelevantWorkout(workoutName);
 
-    relevantWorkout.exercices.add(
-        Exercise(name: exerciseName, weight: weight, sets: sets, reps: reps));
+    revelantWorkout.exercises.add(
+        Exercise(name: workoutName, weight: weight, sets: sets, reps: reps));
   }
 
-  // Marca um exercício como concluído
-  void checkOffExercise(String workoutName, String exerciseName) {
-    // Encontra um treino relevante
-    Workout relevantWorkout = getRelevantWorkout(workoutName);
-
-    // Encontra um exercício relevante
-    Exercise relevantExercise = relevantWorkout.exercices
-        .firstWhere((exercise) => exercise.name == exerciseName);
-
-    // Marca o exercício como concluído (implementação necessária)
-    // relevantExercise.isChecked = true;
+  //check the erxercise once is done
+  void chekOffExercise(String workoutName, String exerciseName) {
+    //find a relevant workout
   }
 
-  // Obtém o comprimento do treino
+  //get the lenght of the workout
 
-  // Retorna um objeto de treino relevante, dado o nome do treino
+  //return a relevant workout object, given the workout name
   Workout getRelevantWorkout(String workoutName) {
-    Workout relevantWorkout =
-        workoutList.firstWhere((workout) => workout.name == workoutName);
+    Workout revelantWorkout =
+        workoutList.firstWhere((workout) => workout.name == workout.name);
 
-    return relevantWorkout;
+    return revelantWorkout;
   }
 
-  // Retorna um objeto de exercício relevante, dado o nome do treino e o nome do exercício
+  //return a relevant exercise object, given the workoutname + exercise name
+  Exercise getRelevantExercise(
+    String workoutName,
+    String exerciseName,
+  ) {
+    //find a relevant workout
+    Workout relevantWorkout = getRelevantWorkout(workoutName);
+
+    //find a relevant exercise in the workout
+    Exercise relevantExercise = relevantWorkout.exercises
+        .firstWhere((exercises) => exerciseName == exerciseName);
+
+    return relevantExercise;
+  }
 }
