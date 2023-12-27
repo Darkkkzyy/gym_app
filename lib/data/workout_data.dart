@@ -15,7 +15,7 @@ class WorkoutData extends ChangeNotifier {
   List<Workout> workoutList = [
     //default workout
     Workout(name: "Upper Boddy", exercises: [
-      Exercise(name: "Biceps Curls", weight: "10Kg", sets: "10", reps: "10")
+      Exercise(name: "Biceps Curls", weight: "10", sets: "10", reps: "10")
     ])
   ];
 

@@ -31,6 +31,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
       builder: (context) => AlertDialog(
         title: const Text("Add a new Exercise"),
         content: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             //exercise name
             TextField(
@@ -54,12 +55,58 @@ class _WorkoutPageState extends State<WorkoutPage> {
           ],
         ),
         actions: [
-          //save button
+          // Save button
+          MaterialButton(
+            onPressed: save,
+            child: const Text("Save"),
+          ),
 
-          //cancel button
+          // Cancel button
+          MaterialButton(
+            onPressed: cancel,
+            child: const Text("Cancel"),
+          ),
         ],
       ),
     );
+  }
+
+  // Save function
+  void save() {
+    // Get exercise name, weight, sets, reps
+    String newExerciseName = exerciseNameControler.text;
+    String weight = weightControler.text;
+    String sets = setsControler.text;
+    String reps = repsControler.text;
+
+    // Add exercise to workout data list
+    Provider.of<WorkoutData>(context, listen: false).addExercise(
+      widget.workoutName,
+      newExerciseName,
+      weight,
+      reps,
+      sets,
+    );
+
+    // Implement save logic here
+    Navigator.of(context).pop(); // Close the dialog
+    // Clear dialog
+    clear();
+  }
+
+  // Cancel function
+  void cancel() {
+    // Implement cancel logic here
+    Navigator.of(context).pop(); // Close the dialog
+    //clear dialog
+    clear();
+  }
+
+  void clear() {
+    exerciseNameControler.clear();
+    repsControler.clear();
+    weightControler.clear();
+    setsControler.clear();
   }
 
   @override
